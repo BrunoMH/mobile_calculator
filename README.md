@@ -48,3 +48,16 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+
+-PENDING FEATURES 
+   Theme switcher
+   Order CSS with preprocessor
+   Allow 10 numbers
+   Shrink the number size as the space gets reduced for inputs
+   Order folders like a regular project:
+      -App deploys
+      -CSS stablishes styles
+      -ThemeBuilder switches the css
+      -Handlechange for calculations?? procesor??

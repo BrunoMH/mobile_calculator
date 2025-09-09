@@ -1,22 +1,49 @@
-import { Text, View, StyleSheet, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, Pressable, Switch } from 'react-native';
 import styles from './styles'; 
 
 export default function App() {
+  const [input, setInput] = useState('');
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const toggleSwitch = () => setIsEnabled((prev) => !prev);
+
   const handlePress = (value) => {
     const operators = { '×': '*', '÷': '/' };
-    alert(`Pressed: ${operators[value] || value}`);
+    const newValue = operators[value] || value;
+    setInput((prev) => prev + newValue);
   };
 
-  const operatorsUpper = ['c', '÷', '×', '←'];
+  const operatorsUpper = ['C', '÷', '×', '←'];
   const matrixCentral = [
     [7, 8, 9],
     [4, 5, 6],
     [1, 2, 3],
   ];
 
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Calculator App!</Text>
+    <View style={[
+      styles.container,
+      { backgroundColor: isEnabled ? '#fff' : '#000' }, // switch background
+    ]}>
+      <Switch
+        trackColor={{ false: '#66be14ff', true: 'tomato' }}
+        thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      >
+
+      </Switch>
+      <Text style={[
+        styles.title,
+        { color: isEnabled ? '#000' : '#fff' }, //change the text title
+      ]}>Welcome to Calculator App!</Text>
+      <Text style={[
+        styles.input,
+        { color: isEnabled ? '#000' : '#fff' },
+      ]}>{input}</Text>
 
       {/* Top row */}
       <View style={styles.row}>

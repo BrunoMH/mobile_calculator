@@ -8,10 +8,12 @@ export default StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         paddingBottom: 80,
+        backgroundColor: '#000', // needs to switch to white when button-switch is triggered
     },
     title: {
         fontSize: 18,
         marginBottom: 20,
+        color: '#fff',
     },
     mainGrid: {
         flexDirection: 'row',
@@ -41,16 +43,19 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 25,
     },
+    input: {
+        color: '#fff',
+        fontSize: 50,
+        textAlign: 'right',
+        marginBottom: 10,
+        padding: 20,
+    },
     // display: {
-    //     backgroundColor: '#fff',
+    //     backgroundColor: '#000',
     //     padding: 20,
     //     marginBottom: 10,
     // },
-    // displayText: {
-    //     color: '#000',
-    //     fontSize: 48,
-    //     textAlign: 'right',
-    // },
+    
     // expressionText: {
     //     color: '#999',
     //     fontSize: 20,

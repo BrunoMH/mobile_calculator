@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { Text, View, Pressable, Switch } from 'react-native';
-import styles from './styles'; 
+import styles from './styles';
+import { handlePress } from './calculatorLogic';
 
 export default function App() {
   const [input, setInput] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => setIsEnabled((prev) => !prev);
-
-  const handlePress = (value) => {
-    const operators = { '×': '*', '÷': '/' };
-    const newValue = operators[value] || value;
-    setInput((prev) => prev + newValue);
+  
+  const handleButtonPress = (value) => {
+    setInput((prev) => handlePress(prev, value));
   };
 
   const operatorsUpper = ['C', '÷', '×', '←'];
@@ -25,7 +24,7 @@ export default function App() {
   return (
     <View style={[
       styles.container,
-      { backgroundColor: isEnabled ? '#fff' : '#000' }, // switch background
+      { backgroundColor: isEnabled ? '#fff' : '#000' },
     ]}>
       <Switch
         trackColor={{ false: '#66be14ff', true: 'tomato' }}
@@ -38,7 +37,7 @@ export default function App() {
       </Switch>
       <Text style={[
         styles.title,
-        { color: isEnabled ? '#000' : '#fff' }, //change the text title
+        { color: isEnabled ? '#000' : '#fff' },
       ]}>Welcome to Calculator App!</Text>
       <Text style={[
         styles.input,
@@ -50,7 +49,7 @@ export default function App() {
         {operatorsUpper.map((item, index) => (
           <Pressable
             key={index}
-            onPress={() => handlePress(item)}
+            onPress={() => handleButtonPress(item)}
             style={styles.button}
           >
             <Text style={styles.number}>{item}</Text>
@@ -67,7 +66,7 @@ export default function App() {
               {row.map((item, colIndex) => (
                 <Pressable
                   key={colIndex}
-                  onPress={() => handlePress(item)}
+                  onPress={() => handleButtonPress(item)}
                   style={styles.button}
                 >
                   <Text style={styles.number}>{item}</Text>
@@ -79,13 +78,13 @@ export default function App() {
           {/* Last row with 0 and . */}
           <View style={styles.row}>
             <Pressable
-              onPress={() => handlePress(0)}
+              onPress={() => handleButtonPress(0)}
               style={[styles.button, styles.zeroButton]}
             >
               <Text style={styles.number}>0</Text>
             </Pressable>
             <Pressable
-              onPress={() => handlePress('.')}
+              onPress={() => handleButtonPress('.')}
               style={styles.button}
             >
               <Text style={styles.number}>.</Text>
@@ -96,19 +95,19 @@ export default function App() {
         {/* Operators */}
         <View>
           <Pressable
-            onPress={() => handlePress('-')}
+            onPress={() => handleButtonPress('-')}
             style={styles.button}
           >
             <Text style={styles.number}>-</Text>
           </Pressable>
           <Pressable
-            onPress={() => handlePress('+')}
+            onPress={() => handleButtonPress('+')}
             style={styles.button}
           >
             <Text style={styles.number}>+</Text>
           </Pressable>
           <Pressable
-            onPress={() => handlePress('=')}
+            onPress={() => handleButtonPress('=')}
             style={[styles.button, styles.equalButton]}
           >
             <Text style={styles.number}>=</Text>

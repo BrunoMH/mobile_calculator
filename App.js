@@ -5,12 +5,33 @@ import { handlePress } from './calculatorLogic';
 
 export default function App() {
   const [input, setInput] = useState('');
+  const [expressions, setExpressions] = useState([]);
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => setIsEnabled((prev) => !prev);
-  
+
   const handleButtonPress = (value) => {
-    setInput((prev) => handlePress(prev, value));
+    if (value === '=') {
+      try {
+        const result = handlePress(input, value);
+        const newExpression = `${input} = ${result}`;
+
+        setExpressions((prev) => {
+          const updated = [...prev, newExpression];
+          if (updated.length > 3) updated.shift();
+          return updated;
+        });
+
+        setInput(result.toString());
+      } catch {
+        setInput('Error');
+      }
+    } else if (value === 'C') {
+      setInput('');
+      setExpressions([]);
+    } else {
+      setInput((prev) => handlePress(prev, value));
+    }
   };
 
   const operatorsUpper = ['C', '÷', '×', '←'];
@@ -26,23 +47,35 @@ export default function App() {
       styles.container,
       { backgroundColor: isEnabled ? '#fff' : '#000' },
     ]}>
-      <Switch
-        trackColor={{ false: '#66be14ff', true: 'tomato' }}
-        thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      >
+      <View style={styles.topBar}>
+        <Switch
+          trackColor={{ false: '#66be14ff', true: 'tomato' }}
+          thumbColor={'#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </View>
 
-      </Switch>
-      <Text style={[
-        styles.title,
-        { color: isEnabled ? '#000' : '#fff' },
-      ]}>Welcome to Calculator App!</Text>
-      <Text style={[
-        styles.input,
-        { color: isEnabled ? '#000' : '#fff' },
-      ]}>{input}</Text>
+      <View style={styles.numbers}>
+        {expressions.map((expr, idx) => (
+          <Text 
+          key={idx}
+          style={[
+            styles.expressionText,
+            { color: isEnabled ? '#444' : '#aaa' },
+          ]}>
+            {expr}
+          </Text>
+        ))}
+
+        <Text style={[
+          styles.input,
+          { color: isEnabled ? '#000' : '#fff' },
+        ]}>
+          {input}
+        </Text>
+      </View>
 
       {/* Top row */}
       <View style={styles.row}>

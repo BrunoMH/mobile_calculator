@@ -52,12 +52,12 @@ Join our community of developers creating universal apps.
 
 
 -PENDING FEATURES 
-   Theme switcher
+   Theme switcher - DONE
    Order CSS with preprocessor
-   Allow 10 numbers
-   Shrink the number size as the space gets reduced for inputs
+   Allow 10 numbers - DONE
+   Shrink the number size as the space gets reduced for inputs -NA
    Order folders like a regular project:
-      -App deploys
-      -CSS stablishes styles
-      -ThemeBuilder switches the css
-      -Handlechange for calculations?? procesor??
+      -App deploys 
+      -CSS stablishes styles - DONE 
+      -ThemeBuilder switches the css -  DONE 
+      -Handlechange for calculations?? procesor?? - DONE
